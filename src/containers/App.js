@@ -15,22 +15,22 @@ const mapStateToProps = (state) => {
     searchField: state.searchRobots.searchField,
     robots: state.requestRobots.robots,
     isPending: state.requestRobots.isPending
-  }
-}
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
     onSearchChange: (event) => dispatch(setSearchField(event.target.value)),
     onRequestRobots: () => requestRobots(dispatch)
-  }
-}
+  };
+};
 
 class App extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
       count: 1
-    }
+    };
   }
   componentDidMount() {
     this.props.onRequestRobots();
@@ -40,16 +40,20 @@ class App extends Component {
     const { robots, searchField, onSearchChange, isPending } = this.props;
     const filteredRobots = robots.filter(robot => {
       return robot.name.toLowerCase().includes(searchField.toLowerCase());
-    })
+    });
     return (
       <div className='tc'>
-        <Header count={this.state.count}/>
-        <SearchBox searchChange={onSearchChange}/>
+        <Header count={ this.state.count } />
+        <SearchBox searchChange={ onSearchChange } />
         <Scroll>
-          { isPending ? <h1>Loading</h1> :
-            <ErrorBoundry>
-              <CardList robots={filteredRobots} />
-            </ErrorBoundry>
+          {
+            isPending
+              ? <h1>Loading</h1>
+              : (
+                <ErrorBoundry>
+                  <CardList robots={ filteredRobots } />
+                </ErrorBoundry>
+              )
           }
         </Scroll>
       </div>
@@ -57,4 +61,4 @@ class App extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App);
