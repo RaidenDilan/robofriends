@@ -1,5 +1,5 @@
-# robofriends-pwa
-Udemy tutorial - adding PWA capabilities to a react app
+# robofriends
+Udemy Tutorial
 
 To run the project:
 
